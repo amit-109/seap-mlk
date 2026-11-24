@@ -3,10 +3,15 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import { BookOpenCheck, Menu, X } from "lucide-react";
 import { navigation } from "../data/navigation.js";
 import ButtonLink from "../components/ButtonLink.jsx";
+import { useLanguage } from "../contexts/LanguageContext.jsx";
 
 export default function SiteLayout() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { language, setLanguage } = useLanguage();
   const closeMenu = () => setMenuOpen(false);
+  const navLabels = language === "hi"
+    ? ["मुखपृष्ठ", "SEAP परिचय", "शिक्षक गाइड", "छात्र गाइड", "वीडियो", "इंस्टॉलेशन", "प्रश्न"]
+    : null;
 
   return (
     <div className="site-shell">
@@ -35,7 +40,7 @@ export default function SiteLayout() {
             {menuOpen ? <X size={23} /> : <Menu size={23} />}
           </button>
           <nav className={`main-nav ${menuOpen ? "main-nav--open" : ""}`} aria-label="Main navigation">
-            {navigation.map((item) => (
+            {navigation.map((item, index) => (
               <NavLink
                 key={item.to}
                 to={item.to}
@@ -43,10 +48,19 @@ export default function SiteLayout() {
                 className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
                 onClick={closeMenu}
               >
-                {item.label}
+                {navLabels ? navLabels[index] : item.label}
               </NavLink>
             ))}
-            <ButtonLink className="header-portal-link">Official portal</ButtonLink>
+            <ButtonLink className="header-portal-link">{language === "hi" ? "अधिकारी पोर्टल" : "Official portal"}</ButtonLink>
+            <button
+              type="button"
+              className="language-toggle"
+              aria-label={language === "hi" ? "Switch to English" : "हिंदी में देखें"}
+              onClick={() => setLanguage(language === "hi" ? "en" : "hi")}
+            >
+              <span className={language === "en" ? "is-active" : ""}>EN</span>
+              <span className={language === "hi" ? "is-active" : ""}>हिं</span>
+            </button>
           </nav>
         </div>
       </header>
