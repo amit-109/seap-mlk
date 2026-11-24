@@ -5,7 +5,7 @@ import PortalNotice from "../components/PortalNotice.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import { videos } from "../data/videos.js";
 
-const filters = ["All", "Faculty", "Students", "Everyone"];
+const filters = ["Faculty", "Students"];
 
 function isEmbedUrl(url) {
   return /youtube\.com\/embed\/|player\.vimeo\.com\/video\//i.test(url);
@@ -28,24 +28,24 @@ function VideoPlayer({ video }) {
 }
 
 export default function VideoTutorials() {
-  const [filter, setFilter] = useState("All");
-  const [selectedId, setSelectedId] = useState("V1");
-  const filteredVideos = useMemo(() => filter === "All" ? videos : videos.filter((video) => video.audience === filter), [filter]);
+  const [filter, setFilter] = useState("Faculty");
+  const [selectedId, setSelectedId] = useState("Faculty");
+  const filteredVideos = useMemo(() => videos.filter((video) => video.audience === filter), [filter]);
   const selectedVideo = filteredVideos.find((video) => video.id === selectedId) ?? filteredVideos[0];
 
   function chooseFilter(value) {
     setFilter(value);
-    const first = value === "All" ? videos[0] : videos.find((video) => video.audience === value);
+    const first = videos.find((video) => video.audience === value);
     if (first) setSelectedId(first.id);
   }
 
   return (
     <>
-      <PageHero eyebrow="VIDEO TUTORIALS" title="See the SEAP journey, step by step" description="Browse the V1–V5 video tutorial sections for an overview of faculty and student workflows." />
+      <PageHero eyebrow="VIDEO TUTORIALS" title="See the SEAP journey, step by step" description="Watch the orientation videos for faculty and student workflows." />
       <div className="container page-content" id="page-content">
         <section className="section-block video-section">
           <SectionHeading eyebrow="VIDEO LIBRARY" title="Choose an orientation video">
-            Video links remain placeholders until they are supplied by the programme team. Select a section to see its player area and description.
+            Choose a faculty or student login video.
           </SectionHeading>
           <div className="video-filters" role="group" aria-label="Filter videos by audience">
             {filters.map((value) => <button key={value} type="button" className={`filter-chip ${filter === value ? "is-active" : ""}`} aria-pressed={filter === value} onClick={() => chooseFilter(value)}>{value}</button>)}

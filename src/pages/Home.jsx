@@ -1,19 +1,16 @@
 import { ArrowRight, BookOpen, ClipboardCheck, GraduationCap, Layers3, UsersRound, Video } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import ButtonLink from "../components/ButtonLink.jsx";
 import FeatureCard from "../components/FeatureCard.jsx";
 import PortalNotice from "../components/PortalNotice.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import { useLanguage } from "../contexts/LanguageContext.jsx";
-
-const pathways = [
-  { title: "Faculty Guide", description: "From faculty registration to creating a learning batch.", icon: GraduationCap, to: "/faculty-guide", color: "orange" },
-  { title: "Student Guide", description: "Join your faculty’s batch and begin learning on SEAP.", icon: UsersRound, to: "/student-guide", color: "teal" },
-  { title: "Video Tutorials", description: "Browse the V1–V5 orientation video sections.", icon: Video, to: "/video-tutorials", color: "blue" },
-];
+import { videos } from "../data/videos.js";
 
 export default function Home() {
   const { language } = useLanguage();
+  const [videoIndex, setVideoIndex] = useState(0);
   const hindi = language === "hi";
   const roleCards = hindi
     ? [
@@ -43,13 +40,32 @@ export default function Home() {
               <span><ClipboardCheck size={17} /> {hindi ? "चरण-दर-चरण गाइड" : "Guided orientation"}</span>
             </div>
           </div>
-          <div className="hero-art" aria-label="Illustration of a learning pathway">
-            <div className="hero-art__halo" />
-            <div className="hero-art__card hero-art__card--top"><span className="art-icon art-icon--orange"><GraduationCap size={22} /></span><span><strong>Faculty</strong><small>Guide a learning batch</small></span></div>
-            <div className="hero-art__book"><span className="book-spine" /><div className="book-content"><span className="book-tag">SEAP JOURNEY</span><strong>Learn.<br />Practice.<br /><em>Progress.</em></strong><div className="book-lines"><i /><i /><i /></div></div></div>
-            <div className="hero-art__card hero-art__card--bottom"><span className="art-icon art-icon--teal"><UsersRound size={20} /></span><span><strong>Students</strong><small>Learn at your own pace</small></span></div>
-            <span className="hero-art__spark hero-art__spark--one">✳</span>
-            <span className="hero-art__spark hero-art__spark--two">+</span>
+          <div className="hero-video-carousel" aria-label="SEAP orientation videos">
+            <div className="hero-video-carousel__frame">
+              <video
+                key={videos[videoIndex].id}
+                src={videos[videoIndex].url}
+                controls
+                preload="metadata"
+                title={videos[videoIndex].title}
+              />
+              <span className="hero-video-carousel__tag">
+                {hindi ? "वीडियो गाइड" : "Video guide"} · {hindi ? (videos[videoIndex].audience === "Faculty" ? "शिक्षक" : "छात्र") : videos[videoIndex].audience}
+              </span>
+            </div>
+            <div className="hero-video-carousel__controls" aria-label="Choose orientation video">
+              {videos.map((video, index) => (
+                <button
+                  type="button"
+                  key={video.id}
+                  className={videoIndex === index ? "is-active" : ""}
+                  aria-pressed={videoIndex === index}
+                  onClick={() => setVideoIndex(index)}
+                >
+                  {hindi ? (video.audience === "Faculty" ? "शिक्षक" : "छात्र") : video.audience}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
         <div className="hero-bottom-line" />
@@ -93,7 +109,7 @@ export default function Home() {
               <Link to="/video-tutorials" className="pathway-card">
                 <span className="pathway-card__icon pathway-card__icon--blue"><Video size={23} /></span>
                 <h3>{hindi ? "वीडियो से सीखें" : "Learn with videos"}</h3>
-                <p>{hindi ? "V1 से V5 तक आसान वीडियो मार्गदर्शिका देखें।" : "Browse the V1–V5 orientation video sections."}</p>
+                <p>{hindi ? "शिक्षक और छात्र के लिए आसान वीडियो मार्गदर्शिका देखें।" : "Watch simple orientation videos for faculty and students."}</p>
                 <span className="pathway-card__link">{hindi ? "वीडियो देखें" : "Open videos"} <ArrowRight size={16} /></span>
               </Link>
             </div>

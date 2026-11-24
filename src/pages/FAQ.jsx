@@ -12,7 +12,7 @@ const faqs = [
   { q: "Can this site issue or recover my batch code?", a: "No. Batch codes are created and managed on SEAP by faculty. Ask your faculty guide for the correct code." },
   { q: "How many modules and lessons does the programme include?", a: "SEAP includes five modules and 25 lessons. Check the official portal for the current module names, lesson content and completion requirements." },
   { q: "Can I see student progress here?", a: "No. Student progress is available only through the faculty dashboard on the official portal. This orientation guide does not connect to live SEAP data." },
-  { q: "Where are the video tutorials?", a: "The Video Tutorials page is organised into V1–V5 sections. Video URLs are placeholders until verified links are supplied by the programme team." },
+  { q: "Where are the video tutorials?", a: "The Video Tutorials page has separate Faculty and Student orientation videos." },
   { q: "Do I need to install an app?", a: "The available materials do not confirm a separate app or installer. Start at the official SEAP website and follow any device or installation guidance shown there." },
   { q: "Who should I contact if I cannot register?", a: "Follow the help or support information shown on the official portal, or contact your institution's SEAP coordinator. No unverified contact details are listed on this site." },
 ];

@@ -114,6 +114,63 @@ main { flex: 1; }
 .hero-art__spark { position: absolute; color: #f1ad6c; }
 .hero-art__spark--one { top: 57px; left: 32px; font-size: 22px; }
 .hero-art__spark--two { right: 0; bottom: 65px; font-size: 28px; }
+.hero-video-carousel {
+  width: min(100%, 470px);
+  justify-self: end;
+  padding: 12px;
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 14px;
+  box-shadow: 0 18px 45px rgba(4, 17, 34, .25);
+  backdrop-filter: blur(8px);
+}
+.hero-video-carousel__frame {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #09182b;
+  border-radius: 9px;
+}
+.hero-video-carousel__frame video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+.hero-video-carousel__tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 6px 9px;
+  color: #fff;
+  background: rgba(11, 28, 51, .78);
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  pointer-events: none;
+}
+.hero-video-carousel__controls {
+  display: flex;
+  gap: 7px;
+  margin-top: 9px;
+}
+.hero-video-carousel__controls button {
+  min-height: 36px;
+  flex: 1;
+  border: 1px solid rgba(255, 255, 255, .22);
+  background: rgba(255, 255, 255, .08);
+  color: #d8e5ee;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.hero-video-carousel__controls button.is-active {
+  color: #fff;
+  background: var(--teal);
+  border-color: var(--teal);
+}
 .hero-bottom-line { position: absolute; right: 0; bottom: 0; left: 0; height: 4px; background: linear-gradient(90deg, var(--teal), #6ecabc, var(--orange)); }
 .orientation-strip { background: #eef6f5; border-bottom: 1px solid #e2eeed; }
 .orientation-strip__inner { min-height: 61px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
@@ -313,6 +370,7 @@ main { flex: 1; }
   .home-hero__copy { max-width: 620px; }
   .home-hero h1 { max-width: 500px; margin-top: 17px; font-size: clamp(41px, 9.5vw, 56px); }
   .home-hero__lead { font-size: 14px; }
+  .hero-video-carousel { width: min(100%, 520px); justify-self: center; margin-top: 18px; }
   .hero-facts { gap: 12px; margin-top: 24px; font-size: 10px; }
   .hero-art { width: min(100%, 420px); min-height: 300px; margin: 0 auto; transform: scale(.84); transform-origin: center top; }
   .orientation-strip__inner { align-items: flex-start; flex-wrap: wrap; gap: 7px 12px; padding-top: 13px; padding-bottom: 13px; }
